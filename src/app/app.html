@@ -1,1 +1,18 @@
-<ion-nav [root]="rootPage"></ion-nav>
+<ion-menu [content]="content" side="right">
+    <unasus-perfil></unasus-perfil>
+    <ion-list>
+        <button ion-item no-padding (click)="PerfilPage()">
+            <ion-icon name="md-happy" padding-left color="unasus-blue"></ion-icon>
+            <span padding-left>Perfil</span>
+        </button>
+        <button ion-item no-padding (click)="ContactPage()">
+            <ion-icon name="md-call" padding-left color="unasus-blue"></ion-icon>
+            <span padding-left>Contato</span>
+        </button>
+        <button ion-item no-padding (click)="aboutPage()">
+            <ion-icon name="md-help-circle" padding-left color="unasus-blue"></ion-icon>
+            <span padding-left>Sobre</span>
+        </button>
+    </ion-list>
+</ion-menu>
+<ion-nav #myNav #content [root]="rootPage"></ion-nav>

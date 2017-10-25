@@ -1,0 +1,33 @@
+unasus-perfil {
+    position: relative;
+    display: block;
+    width: 100%;
+    height: 15rem;
+    background: linear-gradient(45deg, rgba(112,167,219,1) 0%, rgba(75,144,209,1) 30%, rgba(31,108,184,1) 51%, rgba(18,92,171,1) 86%, rgba(18,92,171,1) 100%);
+}
+
+unasus-perfil .perfil_user {
+    position: absolute;
+    width: 20rem;
+    height: 10rem;
+    top: 50%;
+    left: 50%;
+    margin-top: -5rem;
+    margin-left: -10rem;
+}
+
+unasus-perfil img {
+    position: absolute;
+    float: left;
+    width: 50px;
+    height: 64px;
+    left: 50%;
+    margin-left: -25px;
+}
+
+unasus-perfil span {
+    display: block;
+    margin-top: 8.5rem;
+    text-align: center;
+    color: #ffffff;
+}

@@ -1,14 +1,67 @@
 <ion-header>
-  <ion-navbar>
-    <ion-title>
-      Ionic Blank
+  <ion-navbar color="unasus-blue">
+    <ion-title padding-left>
+      {{title}}
     </ion-title>
   </ion-navbar>
 </ion-header>
-
 <ion-content padding>
-  The world is your oyster.
-  <p>
-    If you get lost, the <a href="http://ionicframework.com/docs/v2">docs</a> will be your guide.
-  </p>
+    <ion-card>
+      <img src="assets/imgs/banner.png"/>
+      <ion-card-content>
+        <ion-card-title>
+            Lorem ipsum dolor sit amet
+        </ion-card-title>
+        <p>
+            Lorem ipsum dolor sit amet, 
+            consectetur adipiscing elit, sed do eiusmod tempor 
+            incididunt ut labore et dolore magna aliqua. 
+        </p>
+      </ion-card-content>
+      <ion-grid>
+        <ion-row>
+            <ion-col>
+                <button ion-button color="unasus-blue" full>
+                    <ion-icon name="md-download"></ion-icon>
+                    <span padding-left>Baixar</span>
+                </button>
+            </ion-col>
+            <ion-col>
+                <button ion-button color="unasus-blue" full>
+                    <ion-icon name="md-eye"></ion-icon>
+                    <span padding-left>Saiba Mais</span>
+                </button>
+            </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-card>
+    <ion-card>
+      <img src="assets/imgs/banner1.png"/>
+        <ion-card-content>
+        <ion-card-title>
+          Lorem ipsum dolor sit amet
+        </ion-card-title>
+        <p>
+          Lorem ipsum dolor sit amet, 
+          consectetur adipiscing elit, sed do eiusmod tempor 
+          incididunt ut labore et dolore magna aliqua. 
+        </p>
+        </ion-card-content>
+        <ion-grid>
+          <ion-row>
+              <ion-col>
+                  <button ion-button color="unasus-blue" full>
+                      <ion-icon name="md-download"></ion-icon>
+                      <span padding-left>Baixar</span>
+                  </button>
+              </ion-col>
+              <ion-col>
+                  <button ion-button color="unasus-blue" full>
+                      <ion-icon name="md-eye"></ion-icon>
+                      <span padding-left>Saiba Mais</span>
+                  </button>
+              </ion-col>
+          </ion-row>
+        </ion-grid>
+    </ion-card>
 </ion-content>
