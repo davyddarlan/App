@@ -1,31 +1,24 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { NavController, AlertController } from 'ionic-angular';
 import { Network } from '@ionic-native/network';
+import { HttpClient } from '@angular/common/http';
+
+import { Ressources } from './ressources';
 
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html'
 })
-export class HomePage {
-  private title: string = 'Saúde da Pessoa Idosa';
+export class HomePage implements OnInit {
+  private title: string = 'App SUS';
+  private ressources: Ressources;
 
-  constructor(private navCtrl: NavController, 
-  private network: Network, private alertCtrl: AlertController) {
-  }
+  constructor(
+  private navCtrl: NavController, private network: Network, 
+  private alertCtrl: AlertController, private http: HttpClient
+  ) {}
 
-  download() {
-    if (this.network.type === 'none') {
-      this.alertCtrl.create({
-        title: 'Download falhou',
-        subTitle: 'Verifique se você está conenctado a alguma rede com internet',
-        buttons: ['ok']
-      }).present();
-    } else {
-      this.alertCtrl.create({
-        title: 'Recurso baixado',
-        subTitle: 'O seu recurso foi baixado com sucesso',
-        buttons: ['ok']
-      }).present();
-    }
+  ngOnInit() {
+    this.ressources = new Ressources(this.http);
   }
 }
