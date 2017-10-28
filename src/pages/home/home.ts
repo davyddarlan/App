@@ -1,7 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { NavController, AlertController } from 'ionic-angular';
 import { Network } from '@ionic-native/network';
-import { HttpClient } from '@angular/common/http';
 
 import { Ressources } from './ressources';
 
@@ -9,16 +8,12 @@ import { Ressources } from './ressources';
   selector: 'page-home',
   templateUrl: 'home.html'
 })
-export class HomePage implements OnInit {
+export class HomePage {
   private title: string = 'App SUS';
-  private ressources: Ressources;
 
   constructor(
-  private navCtrl: NavController, private network: Network, 
-  private alertCtrl: AlertController, private http: HttpClient
+    private navCtrl: NavController, 
+    private network: Network,
+    private ressources: Ressources
   ) {}
-
-  ngOnInit() {
-    this.ressources = new Ressources(this.http);
-  }
 }

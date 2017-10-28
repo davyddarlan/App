@@ -14,6 +14,10 @@ import { HomePage } from '../pages/home/home';
 import { AboutPage } from '../pages/about/about';
 import { ContactPage } from '../pages/contact/contact';
 import { PerfilPage } from '../pages/perfil/perfil';
+
+//providers
+import { Cache } from '../classes/cache/cache';
+import { Ressources } from '../pages/home/ressources';
  
 @NgModule({
   declarations: [
@@ -42,6 +46,8 @@ import { PerfilPage } from '../pages/perfil/perfil';
     StatusBar,
     SplashScreen,
     Network,
+    Cache,
+    Ressources,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })
