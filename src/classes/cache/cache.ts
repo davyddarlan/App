@@ -1,21 +1,44 @@
 import { Injectable } from '@angular/core';
 
+import { Persistence } from '../../classes/persistence/persistence';
+
+let md5 = require('md5');
+
 @Injectable()
 export class Cache {
-    setPersistence(name: string, element: any): void {
-        localStorage.setItem(name, element);
-    }
+    constructor(
+        private persistence: Persistence
+    ) {}
 
-    getPersistence(name: string): any {
-        return localStorage.getItem(name);
-    }
-
-    verifyPersistence(name: string): boolean {
-        let nameOfElement = this.getPersistence(name);
-        if (nameOfElement) {
+    cacheVerify(repositoy: string): boolean {
+        if (this.persistence.verifyPersistence(repositoy)) {
             return true;
         } else {
             return false;
         }
     }
-}
+
+    cacheRegister(repositoy: string, data: string): void {
+        if (this.cacheVerify(repositoy)) {
+            let currentRepositoryData = md5(this.cacheReturn(repositoy));
+            let newRepositoryData = md5(data);
+            if (currentRepositoryData != newRepositoryData) {
+                this.persistence.setPersistence(repositoy, data);
+            } 
+        } else {
+            this.persistence.setPersistence(repositoy, data);
+        }
+    }
+
+    cacheReturn(repositoy: string): any {
+        return this.persistence.getPersistence(repositoy);
+    }
+
+    cacheClear(repositoy: string): boolean {
+        if (this.persistence.removePersistence(repositoy)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+  }

@@ -16,8 +16,9 @@ import { ContactPage } from '../pages/contact/contact';
 import { PerfilPage } from '../pages/perfil/perfil';
 
 //providers
-import { Cache } from '../classes/cache/cache';
+import { Persistence } from '../classes/persistence/persistence';
 import { Ressources } from '../pages/home/ressources';
+import { Cache } from '../classes/cache/cache';
  
 @NgModule({
   declarations: [
@@ -46,8 +47,9 @@ import { Ressources } from '../pages/home/ressources';
     StatusBar,
     SplashScreen,
     Network,
-    Cache,
+    Persistence,
     Ressources,
+    Cache,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })
