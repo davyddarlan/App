@@ -16,4 +16,8 @@ export class HomePage {
     private network: Network,
     private ressources: Ressources
   ) {}
+
+  doRefresh(refresher) {
+    this.ressources.requestHttp(refresher);
+  }
 }

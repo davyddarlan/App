@@ -6,7 +6,7 @@
   </ion-navbar>
 </ion-header>
 <ion-content padding>
-    <ion-refresher>
+    <ion-refresher (ionRefresh)="doRefresh($event)">
         <ion-refresher-content pullingText="Puxe para atualizar.">
         </ion-refresher-content>
     </ion-refresher>

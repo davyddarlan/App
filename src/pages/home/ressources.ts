@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 import { Cache } from '../../classes/cache/cache';
@@ -10,7 +10,7 @@ interface DataRessorces {
 @Injectable()
 export class Ressources {
     private listRessources: object[];
-    private urlRessources: string = 'https://teste2.unasus.gov.br/MServer3/api/appsus/v1/acervo/itens';
+    private urlRessources: string = 'http://192.168.15.8:8080/itens.json';
 
     constructor(private http: HttpClient, private cache: Cache) {
         if (this.cache.cacheVerify('items')) {
@@ -37,10 +37,16 @@ export class Ressources {
         return JSON.parse(data);
     }
 
-    private requestHttp(): void {
-        this.http.get<DataRessorces>(this.urlRessources).subscribe(data => {
+    requestHttp(refresher: any = null): void {
+        this.http.get<DataRessorces>(this.urlRessources, {
+            headers: new HttpHeaders().set('Cache-Control', 'no-cache, no-store, must-revalidate')
+        }).subscribe(data => {
             this.cache.cacheRegister('items', this.dataToString(data.itens));
             this.setRessources(this.dataToObject(this.cache.cacheReturn('items')));
+
+            if (refresher != null) {
+                refresher.complete();
+            }
         });
     }
 }
