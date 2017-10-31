@@ -22,9 +22,6 @@ export class Cache {
             let newRepositoryData = hash.md5(data);
             if (currentRepositoryData != newRepositoryData) {
                 this.persistence.setPersistence(repositoy, data);
-                alert('diferentes');
-            } else {
-                alert('iguais');
             }
         } else {
             this.persistence.setPersistence(repositoy, data);

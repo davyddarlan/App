@@ -10,7 +10,7 @@
         <ion-refresher-content pullingText="Puxe para atualizar.">
         </ion-refresher-content>
     </ion-refresher>
-    <ion-card *ngFor="let iten of ressources.getRessources()">
+    <ion-card *ngFor="let iten of getRessources()">
       <ion-card-content>
         <ion-card-title>
             {{ iten.titulo }}
@@ -19,9 +19,14 @@
       <ion-grid>
         <ion-row>
             <ion-col>
-                <button ion-button color="unasus-blue" full>
+                <button ion-button color="unasus-blue" 
+                  full (click)="downloadRessource(iten.arquivo)"> 
                     <ion-icon name="md-download"></ion-icon>
                     <span padding-left>Baixar</span>
+                </button>
+                <button ion-button color="unasus-blue" full (click)="ressourcePage(iten.arquivo)"> 
+                    <ion-icon name="md-download"></ion-icon>
+                    <span padding-left>Abrir</span>
                 </button>
             </ion-col>
         </ion-row>

@@ -5,6 +5,9 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 import { Network } from '@ionic-native/network';
 import { HttpClientModule } from '@angular/common/http';
+import { FileTransfer } from '@ionic-native/file-transfer';
+import { File } from '@ionic-native/file';
+import { Zip } from '@ionic-native/zip';
 
 import { MyApp } from './app.component';
 import { ComponentsModule } from '../components/components.module';
@@ -14,11 +17,14 @@ import { HomePage } from '../pages/home/home';
 import { AboutPage } from '../pages/about/about';
 import { ContactPage } from '../pages/contact/contact';
 import { PerfilPage } from '../pages/perfil/perfil';
+import { RessourcePage } from '../pages/ressource/ressource';
 
 //providers
 import { Persistence } from '../classes/persistence/persistence';
-import { Ressources } from '../pages/home/ressources';
+import { Ressources } from '../classes/ressources/ressources';
 import { Cache } from '../classes/cache/cache';
+import { Transfer } from '../classes/transfer/transfer';
+import { Extra } from '../classes/extra/extra';
  
 @NgModule({
   declarations: [
@@ -26,7 +32,8 @@ import { Cache } from '../classes/cache/cache';
     HomePage,
     AboutPage,
     ContactPage,
-    PerfilPage
+    PerfilPage,
+    RessourcePage
   ],
   imports: [
     BrowserModule,
@@ -41,7 +48,8 @@ import { Cache } from '../classes/cache/cache';
     HomePage,
     AboutPage,
     ContactPage,
-    PerfilPage
+    PerfilPage,
+    RessourcePage
   ],
   providers: [
     StatusBar,
@@ -50,6 +58,11 @@ import { Cache } from '../classes/cache/cache';
     Persistence,
     Ressources,
     Cache,
+    Transfer,
+    FileTransfer,
+    Extra,
+    File,
+    Zip,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })
