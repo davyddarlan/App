@@ -19,9 +19,12 @@
         <p> {{ item.date | date }} </p>
         <button ion-button clear item-end (click)="itens.download(i)" 
         *ngIf="itens.getItem(i).getStatus() == 'BAIXAR'">Baixar</button>
-        <button ion-button clear item-end *ngIf="itens.getItem(i).getStatus() == 'BAIXANDO'">BAIXANDO</button>
-        <button ion-button clear item-end *ngIf="itens.getItem(i).getStatus() == 'ABRIR'">ABRIR</button>
-        <button ion-button clear item-end *ngIf="itens.getItem(i).getStatus() == 'ATUALIZAR'">ATUALIZAR</button>
+        <button ion-button clear item-end (click)="itens.cancel(i)"
+        *ngIf="itens.getItem(i).getStatus() == 'BAIXANDO'">BAIXANDO</button>
+        <button ion-button clear item-end  (click)="openRessource(item)"
+        *ngIf="itens.getItem(i).getStatus() == 'ABRIR'">ABRIR</button>
+        <button ion-button clear item-end 
+        *ngIf="itens.getItem(i).getStatus() == 'ATUALIZAR'">ATUALIZAR</button>
       </ion-item>
     </ion-list>
 </ion-content>

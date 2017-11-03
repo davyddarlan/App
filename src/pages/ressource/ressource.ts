@@ -8,12 +8,9 @@ import { File } from '@ionic-native/file';
   templateUrl: 'ressource.html',
 })
 export class RessourcePage {
-  private data: string;
+  private id: string;
   
-  constructor(
-    private navCtrl: NavController, 
-    private navParams: NavParams
-  ) {
-    this.data = '';
+  constructor(private navParams: NavParams) {
+    this.id = navParams.get('id');
   }
 }

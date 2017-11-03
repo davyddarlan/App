@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Zip } from '@ionic-native/zip';
-import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-native/file-transfer';
+import { FileTransfer, FileTransferObject } from '@ionic-native/file-transfer';
 import { File } from '@ionic-native/file';
 import { AlertController } from 'ionic-angular';
 
@@ -38,12 +38,15 @@ export class Transfer {
                 }
             });
         }).catch((err) => {
+            if (err.code != 4) {
+                this.alertStatusTransfer('Ops!', 'Veja se você está conectado a internet.');
+            }
             item.setStatus('BAIXAR');
-            this.alertStatusTransfer('Ops!', 'Veja se você está conectado a internet.');
         });
     }
 
-    cancel(item: Item):void {
+    cancel(item: Item): void {
+        item.getFileTransfer().abort();
         item.setStatus('CANCELADO');
     }
 

@@ -17,5 +17,11 @@ import { Item } from '../../classes/item/item';
 export class HomePage {
   private title: string = 'App SUS';
 
-  constructor(private itens: Itens) {}
+  constructor(private itens: Itens, private nav: NavController) {}
+
+  openRessource(item: Item): void {
+    this.nav.push(RessourcePage, {
+      id: item.getId()
+    });
+  }
 }
