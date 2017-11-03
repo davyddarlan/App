@@ -6,6 +6,7 @@ import { AlertController } from 'ionic-angular';
 
 import { Persistence } from '../../classes/persistence/persistence';
 import { Extra } from '../../classes/extra/extra';
+import { Item } from '../../classes/item/item';
 
 @Injectable()
 export class Transfer {
@@ -16,23 +17,34 @@ export class Transfer {
         private file: File,
         private alert: AlertController,
         private zip: Zip,
-        private persistence: Persistence,
-        private extra: Extra
-    ){
-        this.fileTransfer = this.transfer.create(); 
-    }
+        private persistence: Persistence
+    ){}
 
-    setTransfer(url: string): void {
-        this.fileTransfer.download(url, this.file.dataDirectory + this.extra.directoryName(url) + '.zip')
+    download(item: Item): void {
+        item.setStatus('BAIXANDO');
+        item.setFileTransfer(this.transfer.create());
+        item.getFileTransfer().download(item.getFile(), this.file.externalApplicationStorageDirectory + item.getId() + '.zip')
         .then((entry) => {
-            this.zip.unzip(this.file.dataDirectory + this.extra.directoryName(url) + '.zip', 
-            this.file.dataDirectory + this.extra.directoryName(url))
+            this.zip.unzip(this.file.externalApplicationStorageDirectory + item.getId() + '.zip', 
+            this.file.externalApplicationStorageDirectory + 'ppu/ ' + item.getId())
             .then(result => {
-                this.alertStatusTransfer('Recursos baixado', 'O recurso foi baixado e já pode ser acessado.');
+                if (result == 0) {
+                    item.setStatus('ABRIR');
+                    this.file.removeFile(this.file.externalApplicationStorageDirectory, item.getId() + '.zip');
+                    this.alertStatusTransfer('Tudo certo!', 'Você já pode acessar o recurso educacional.');
+                } else {
+                    item.setStatus('BAIXAR');
+                    this.alertStatusTransfer('Algo errado!', 'Tente novamente, se o problema persistir entre em contato.');
+                }
             });
         }).catch((err) => {
-            this.alertStatusTransfer('Erro!', 'Verifique se você está conectado a alguma rede.');
+            item.setStatus('BAIXAR');
+            this.alertStatusTransfer('Ops!', 'Veja se você está conectado a internet.');
         });
+    }
+
+    cancel(item: Item):void {
+        item.setStatus('CANCELADO');
     }
 
     private alertStatusTransfer(title: string, message: any = null) {

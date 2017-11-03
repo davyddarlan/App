@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
+import { Httpd, HttpdOptions } from '@ionic-native/httpd';
+import { File } from '@ionic-native/file';
 
 @Component({
   selector: 'page-ressource',
@@ -7,7 +9,11 @@ import { NavController, NavParams } from 'ionic-angular';
 })
 export class RessourcePage {
   private data: string;
-  constructor(private navCtrl: NavController, private navParams: NavParams) {
-    this.data = this.navParams.get('folder') + '/index.html';
+  
+  constructor(
+    private navCtrl: NavController, 
+    private navParams: NavParams
+  ) {
+    this.data = '';
   }
 }

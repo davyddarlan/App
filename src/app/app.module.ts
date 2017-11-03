@@ -8,20 +8,16 @@ import { HttpClientModule } from '@angular/common/http';
 import { FileTransfer } from '@ionic-native/file-transfer';
 import { File } from '@ionic-native/file';
 import { Zip } from '@ionic-native/zip';
+import { Httpd } from '@ionic-native/httpd';
 
 import { MyApp } from './app.component';
 import { ComponentsModule } from '../components/components.module';
 
-//pages
 import { HomePage } from '../pages/home/home';
-import { AboutPage } from '../pages/about/about';
-import { ContactPage } from '../pages/contact/contact';
-import { PerfilPage } from '../pages/perfil/perfil';
 import { RessourcePage } from '../pages/ressource/ressource';
 
-//providers
 import { Persistence } from '../classes/persistence/persistence';
-import { Ressources } from '../classes/ressources/ressources';
+import { Itens } from '../classes/itens/itens';
 import { Cache } from '../classes/cache/cache';
 import { Transfer } from '../classes/transfer/transfer';
 import { Extra } from '../classes/extra/extra';
@@ -30,9 +26,6 @@ import { Extra } from '../classes/extra/extra';
   declarations: [
     MyApp,
     HomePage,
-    AboutPage,
-    ContactPage,
-    PerfilPage,
     RessourcePage
   ],
   imports: [
@@ -46,9 +39,6 @@ import { Extra } from '../classes/extra/extra';
   entryComponents: [
     MyApp,
     HomePage,
-    AboutPage,
-    ContactPage,
-    PerfilPage,
     RessourcePage
   ],
   providers: [
@@ -56,13 +46,14 @@ import { Extra } from '../classes/extra/extra';
     SplashScreen,
     Network,
     Persistence,
-    Ressources,
+    Itens,
     Cache,
     Transfer,
     FileTransfer,
     Extra,
     File,
     Zip,
+    Httpd,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })

@@ -5,31 +5,23 @@
     </ion-title>
   </ion-navbar>
 </ion-header>
-<ion-content padding>
-    <ion-refresher (ionRefresh)="doRefresh($event)">
-        <ion-refresher-content pullingText="Puxe para atualizar.">
+<ion-content>
+    <ion-refresher>
+        <ion-refresher-content>
         </ion-refresher-content>
     </ion-refresher>
-    <ion-card *ngFor="let iten of getRessources()">
-      <ion-card-content>
-        <ion-card-title>
-            {{ iten.titulo }}
-        </ion-card-title>
-      </ion-card-content>
-      <ion-grid>
-        <ion-row>
-            <ion-col>
-                <button ion-button color="unasus-blue" 
-                  full (click)="downloadRessource(iten.arquivo)"> 
-                    <ion-icon name="md-download"></ion-icon>
-                    <span padding-left>Baixar</span>
-                </button>
-                <button ion-button color="unasus-blue" full (click)="ressourcePage(iten.arquivo)"> 
-                    <ion-icon name="md-download"></ion-icon>
-                    <span padding-left>Abrir</span>
-                </button>
-            </ion-col>
-        </ion-row>
-      </ion-grid>
-    </ion-card>
+    <ion-list padding>
+      <ion-item *ngFor="let item of itens.getItens(); let i=index">
+        <ion-thumbnail item-start>
+          <img src="assets/imgs/thumbnail-totoro.png">
+        </ion-thumbnail>
+        <h2> {{ item.title }} </h2>
+        <p> {{ item.date | date }} </p>
+        <button ion-button clear item-end (click)="itens.download(i)" 
+        *ngIf="itens.getItem(i).getStatus() == 'BAIXAR'">Baixar</button>
+        <button ion-button clear item-end *ngIf="itens.getItem(i).getStatus() == 'BAIXANDO'">BAIXANDO</button>
+        <button ion-button clear item-end *ngIf="itens.getItem(i).getStatus() == 'ABRIR'">ABRIR</button>
+        <button ion-button clear item-end *ngIf="itens.getItem(i).getStatus() == 'ATUALIZAR'">ATUALIZAR</button>
+      </ion-item>
+    </ion-list>
 </ion-content>
