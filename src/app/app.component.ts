@@ -1,5 +1,5 @@
-import { Component, ViewChild } from '@angular/core';
-import { Platform, NavController, MenuController } from 'ionic-angular';
+import { Component } from '@angular/core';
+import { Platform, NavController } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { Httpd, HttpdOptions } from '@ionic-native/httpd';
@@ -12,7 +12,6 @@ import { HomePage } from '../pages/home/home';
 })
 export class MyApp {
   rootPage:any = HomePage;
-  @ViewChild('myNav') nav: NavController
 
   /*private options: HttpdOptions = {
     www_root: this.file.externalApplicationStorageDirectory.replace('file://', ''),
@@ -24,7 +23,6 @@ export class MyApp {
     platform: Platform, 
     private statusBar: StatusBar, 
     private splashScreen: SplashScreen, 
-    private menuCtrl: MenuController,
     private httpd: Httpd,
     private file: File
   ) {
@@ -33,9 +31,7 @@ export class MyApp {
       this.splashScreen.hide();
     });
 
-    /*this.httpd.startServer(this.options).subscribe((data) => {
-      alert(data);
-    });*/
+    //this.httpd.startServer(this.options).subscribe((data) => {});
   }
 }
 

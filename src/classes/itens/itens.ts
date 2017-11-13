@@ -1,14 +1,14 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Network } from '@ionic-native/network';
 
 import { Cache } from '../../classes/cache/cache';
-import { Extra } from '../../classes/extra/extra';
-import { Transfer } from '../../classes/transfer/transfer';
 import { Item } from '../../classes/item/item';
 import * as Config from '../../classes/config/config';
 
 interface DataItens {
-    itens: object[]
+    itens: object[],
+    qt_itens: string
 }
 
 @Injectable()
@@ -18,8 +18,7 @@ export class Itens {
     constructor(
         private http: HttpClient,
         private cache: Cache,
-        private extra: Extra,
-        private transfer: Transfer
+        private network: Network
     ) {
         this.requestItens();
     }
@@ -28,37 +27,46 @@ export class Itens {
         return this.listItens;
     }
 
-    download(index: number): void {
-        this.transfer.download(this.getItem(index));
-    }
-
-    cancel(index: number): void {
-        this.transfer.cancel(this.getItem(index));
-    }
-
-    getItem(index: number): Item {
-        return this.listItens[index]
-    }
-
     private setItens(item: Item[]): void {
         this.listItens = item;
     }
 
     private requestItens() {
-        let itemList = [];
-        //cenário com conexão
-        this.http.get<DataItens>(Config.URL_RESSOURCES).subscribe(data => {
-            for (let i of data.itens) {
-                let title = i['titulo'];
-                let date = i['data_alteracao'];
-                let id = this.extra.directoryName(i['arquivo']);
-                let file = i['arquivo'];
-                let item = new Item(title, date, id, file);
-                itemList.push(item);
+        let itemList = []; let item: Item;
+        //cenário com conexão à internet
+        if (!(this.network.type != 'none')) {
+            this.http.get<DataItens>(Config.URL_RESSOURCES).subscribe(data => {
+                for (let i of data.itens) {
+                    let title = i['titulo']; let date = i['data_alteracao']; 
+                    let id = i['codigo']; let file = i['arquivo'];
+                    item = new Item(title, date, id, file);
+                    /*
+                        Cada iteração é enviada para o objeto item e apenas
+                        as partes essencias serão persistidas. 
+                    */
+                    this.cache.cacheRegister(id + '_item', JSON.stringify({
+                        title: title,
+                        date: date,
+                        id: id,
+                        file: file
+                    }));
+                    this.cache.cacheRegister('qtd_items', data.qt_itens);
+                    itemList.push(item);
+                }
+                this.setItens(itemList);
+            });
+        } else {
+            //cenário offline
+            if (this.cache.cacheVerify('qtd_items')) {
+                let qtd_items = this.cache.cacheReturn('qtd_items');
+                for (let i = 0; i <= qtd_items; i++) {
+                    if (i == 0) continue;
+                    let item = JSON.parse(this.cache.cacheReturn(i + '_item'));
+                    item = new Item(item['title'], item['date'], item['id'], item['file']);
+                    itemList.push(item);
+                }
+                this.setItens(itemList);
             }
-            this.setItens(itemList);
-            this.cache.cacheRegister(Config.DATABASE_RESSOURCES_CACHE_NAME, 
-            this.extra.dataToString(this.getItens()));
-        });
+        }
     }
 }

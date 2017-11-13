@@ -15,6 +15,7 @@ import { ComponentsModule } from '../components/components.module';
 
 import { HomePage } from '../pages/home/home';
 import { RessourcePage } from '../pages/ressource/ressource';
+import { LoginPage } from '../pages/login/login';
 
 import { Persistence } from '../classes/persistence/persistence';
 import { Itens } from '../classes/itens/itens';
@@ -26,7 +27,8 @@ import { Extra } from '../classes/extra/extra';
   declarations: [
     MyApp,
     HomePage,
-    RessourcePage
+    RessourcePage,
+    LoginPage
   ],
   imports: [
     BrowserModule,
@@ -39,7 +41,8 @@ import { Extra } from '../classes/extra/extra';
   entryComponents: [
     MyApp,
     HomePage,
-    RessourcePage
+    RessourcePage,
+    LoginPage
   ],
   providers: [
     StatusBar,

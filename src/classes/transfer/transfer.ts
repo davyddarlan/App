@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Zip } from '@ionic-native/zip';
 import { FileTransfer, FileTransferObject } from '@ionic-native/file-transfer';
 import { File } from '@ionic-native/file';
-import { AlertController } from 'ionic-angular';
+import { ToastController } from 'ionic-angular';
 
 import { Persistence } from '../../classes/persistence/persistence';
 import { Extra } from '../../classes/extra/extra';
@@ -15,7 +15,7 @@ export class Transfer {
     constructor(
         private transfer: FileTransfer, 
         private file: File,
-        private alert: AlertController,
+        private toastCtrl: ToastController,
         private zip: Zip,
         private persistence: Persistence
     ){}
@@ -26,20 +26,20 @@ export class Transfer {
         item.getFileTransfer().download(item.getFile(), this.file.externalApplicationStorageDirectory + item.getId() + '.zip')
         .then((entry) => {
             this.zip.unzip(this.file.externalApplicationStorageDirectory + item.getId() + '.zip', 
-            this.file.externalApplicationStorageDirectory + 'ppu/ ' + item.getId())
+            this.file.externalApplicationStorageDirectory + item.getId())
             .then(result => {
                 if (result == 0) {
                     item.setStatus('ABRIR');
                     this.file.removeFile(this.file.externalApplicationStorageDirectory, item.getId() + '.zip');
-                    this.alertStatusTransfer('Tudo certo!', 'Você já pode acessar o recurso educacional.');
+                    this.alertStatusTransfer('Você já pode acessar o recurso educacional.');
                 } else {
                     item.setStatus('BAIXAR');
-                    this.alertStatusTransfer('Algo errado!', 'Tente novamente, se o problema persistir entre em contato.');
+                    this.alertStatusTransfer('Tente novamente, se o problema persistir entre em contato.');
                 }
             });
         }).catch((err) => {
             if (err.code != 4) {
-                this.alertStatusTransfer('Ops!', 'Veja se você está conectado a internet.');
+                this.alertStatusTransfer('Veja se você está conectado a internet.');
             }
             item.setStatus('BAIXAR');
         });
@@ -50,10 +50,22 @@ export class Transfer {
         item.setStatus('CANCELADO');
     }
 
-    private alertStatusTransfer(title: string, message: any = null) {
-        this.alert.create({
-            title: title,
-            message: message
+    remove(item: Item): void {
+        this.file.removeRecursively(this.file.externalApplicationStorageDirectory, item.getId()).then(() => {
+            item.setStatus('BAIXAR');
+            this.alertStatusTransfer('O recurso foi removido.');
+        }).catch(data => {
+            this.alertStatusTransfer(data.message);
+        });
+    }
+
+    private alertStatusTransfer(message: any = null) {
+        this.toastCtrl.create({
+            message: message,
+            duration: 3500,
+            position: 'bottom',
+            showCloseButton: true,
+            closeButtonText: 'ok'
         }).present();
     }
 }

@@ -9,6 +9,7 @@ export class Item {
     private id: string = null;
     private file: string = null;
 
+
     constructor(title: string, date: string, id: string, file: string) {
         this.title = title;
         this.date = date;

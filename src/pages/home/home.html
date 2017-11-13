@@ -10,21 +10,37 @@
         <ion-refresher-content>
         </ion-refresher-content>
     </ion-refresher>
-    <ion-list padding>
+    <div id="list-items" padding>
+      <div class="list-item">
+        <img src="assets/imgs/thumbnail-totoro.png">
+        <p>Saúde da Pessoa Idosa</p>
+        <div class="list-buttons">
+          <!--<div class="button">
+            <ion-icon name="md-cloud-download"></ion-icon>
+          </div>-->
+          <div class="progress-button">
+            <div class="list-button-primary">
+              25%
+            </div>
+            <div class="progress-bar">
+              <div class="progress"></div>
+            </div>
+            <div class="button-cancel">
+              cancelar
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--<ion-list padding>
       <ion-item *ngFor="let item of itens.getItens(); let i=index">
         <ion-thumbnail item-start>
           <img src="assets/imgs/thumbnail-totoro.png">
         </ion-thumbnail>
         <h2> {{ item.title }} </h2>
         <p> {{ item.date | date }} </p>
-        <button ion-button clear item-end (click)="itens.download(i)" 
-        *ngIf="itens.getItem(i).getStatus() == 'BAIXAR'">Baixar</button>
-        <button ion-button clear item-end (click)="itens.cancel(i)"
-        *ngIf="itens.getItem(i).getStatus() == 'BAIXANDO'">BAIXANDO</button>
-        <button ion-button clear item-end  (click)="openRessource(item)"
-        *ngIf="itens.getItem(i).getStatus() == 'ABRIR'">ABRIR</button>
-        <button ion-button clear item-end 
-        *ngIf="itens.getItem(i).getStatus() == 'ATUALIZAR'">ATUALIZAR</button>
+        <div id="buttons-control" item-end> 
+        </div>
       </ion-item>
-    </ion-list>
+    </ion-list>-->
 </ion-content>

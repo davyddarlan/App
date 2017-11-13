@@ -1,7 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 
-import { Player } from './player';
+//import { Player } from './player';
+import { SE_UNASUS_PLAYER_API } from './player_localstore';
 
 @Component({
   selector: 'unasus-player',
@@ -12,7 +13,7 @@ export class UnasusPlayerComponent implements OnInit {
   private urlSanitizer: any;
 
   constructor(private sanitizer: DomSanitizer) {
-    window['SE_UNASUS_PLAYER_API'] = new Player;
+    window['SE_UNASUS_PLAYER_API'] = SE_UNASUS_PLAYER_API;
   }
 
   ngOnInit() {

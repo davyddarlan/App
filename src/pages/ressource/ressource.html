@@ -1,9 +1,10 @@
 <ion-header>
-  <ion-navbar>
-    <ion-title>ressource</ion-title>
+  <ion-navbar color="unasus-blue">
+    <ion-title>
+      {{ title }}
+    </ion-title>
   </ion-navbar>
 </ion-header>
 <ion-content>
-    {{ id }}
-    <!--<unasus-player url="http://localhost:8080"></unasus-player>-->
+    <unasus-player [url]="url"></unasus-player>
 </ion-content>
