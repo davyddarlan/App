@@ -11,42 +11,32 @@
         </ion-refresher-content>
     </ion-refresher>
     <div id="list-items" padding>
-      <div class="list-item">
+      <div class="list-item" *ngFor="let item of itens.getItens()">
         <div class="list-img">
            <img src="assets/imgs/thumbnail-totoro.png">
         </div>
-        <p>Saúde da Pessoa Idosa</p>
+        <p>{{ item.title }}</p>
         <div class="list-buttons">
-          <!--<div class="download"> 
+          <div class="download"> 
             <button><ion-icon name="md-download"></ion-icon></button>
-          </div>-->
-          <!--<div class="progress"> 
+          </div>
+        </div>
+      </div>
+    </div>
+</ion-content>
+
+<!--<div class="progress"> 
             <div class="button-progress">
               <ion-icon name="md-close-circle"></ion-icon>
             </div>
             <div class="progress-load"></div>
             <p>0%</p>
           </div>-->
-          <div class="open">
+          <!--<div class="open">
             <div class="open-button">
               <ion-icon name="md-open"></ion-icon>
             </div>
             <div class="delete-button">
               <ion-icon name="md-trash"></ion-icon>
             </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <!--<ion-list padding>
-      <ion-item *ngFor="let item of itens.getItens(); let i=index">
-        <ion-thumbnail item-start>
-          <img src="assets/imgs/thumbnail-totoro.png">
-        </ion-thumbnail>
-        <h2> {{ item.title }} </h2>
-        <p> {{ item.date | date }} </p>
-        <div id="buttons-control" item-end> 
-        </div>
-      </ion-item>
-    </ion-list>-->
-</ion-content>
+          </div>-->

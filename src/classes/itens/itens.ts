@@ -34,7 +34,7 @@ export class Itens {
     private requestItens() {
         let itemList = []; let item: Item;
         //cenário com conexão à internet
-        if (!(this.network.type != 'none')) {
+        if (this.network.type != 'none') {
             this.http.get<DataItens>(Config.URL_RESSOURCES).subscribe(data => {
                 for (let i of data.itens) {
                     let title = i['titulo']; let date = i['data_alteracao']; 
@@ -57,6 +57,7 @@ export class Itens {
             });
         } else {
             //cenário offline
+            alert('offline');
             if (this.cache.cacheVerify('qtd_items')) {
                 let qtd_items = this.cache.cacheReturn('qtd_items');
                 for (let i = 0; i <= qtd_items; i++) {
