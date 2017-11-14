@@ -59,6 +59,14 @@ export class Transfer {
         });
     }
 
+    private progressTransfer(item: Item): void {
+        item.getFileTransfer().onProgress((progressEvent) => {
+            if (progressEvent.lengthComputable) {
+                item.setProgress(Math.floor((progressEvent.loaded / progressEvent.total) * 100));
+            }
+        });
+    }
+
     private alertStatusTransfer(message: any = null) {
         this.toastCtrl.create({
             message: message,

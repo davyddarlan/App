@@ -57,7 +57,6 @@ export class Itens {
             });
         } else {
             //cenário offline
-            alert('offline');
             if (this.cache.cacheVerify('qtd_items')) {
                 let qtd_items = this.cache.cacheReturn('qtd_items');
                 for (let i = 0; i <= qtd_items; i++) {

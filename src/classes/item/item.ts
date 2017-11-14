@@ -1,4 +1,4 @@
-import {  FileTransferObject } from '@ionic-native/file-transfer';
+import { FileTransferObject } from '@ionic-native/file-transfer';
 import { Persistence } from '../../classes/persistence/persistence';
 import { Extra } from '../../classes/extra/extra';
 
@@ -8,7 +8,7 @@ export class Item {
     private fileTrasfer: FileTransferObject = null;
     private id: string = null;
     private file: string = null;
-
+    private progress: number = 0;
 
     constructor(title: string, date: string, id: string, file: string) {
         this.title = title;
@@ -39,6 +39,14 @@ export class Item {
 
     getId(): string {
         return this.id;
+    }
+
+    setProgress(time: number) {
+        this.progress = time;
+    }
+
+    getProgress(): number {
+        return this.progress;
     }
 
     setStatus(status: string): void {

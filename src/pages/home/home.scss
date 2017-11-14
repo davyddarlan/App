@@ -145,6 +145,11 @@ page-home .open-button {
     background: #125dab;
 } 
 
+page-home .open-button, page-home .delete-button {
+    width: 100%;
+    height: 50%;
+}
+
 page-home .open-button:active {
     background: radial-gradient(ellipse at center, rgba(28,143,214,1) 0%, rgba(21,109,185,1) 67%, rgba(18,93,171,1) 100%);
 }
@@ -154,4 +159,12 @@ page-home .delete-button {
     justify-content: center;
     align-items: center;
     background: #DB4040;
+}
+
+@media screen and (max-width: 480px) {
+    page-home .progress p {
+        top: 30%;
+        left: 0%;
+        font-size: .7em;
+    } 
 }

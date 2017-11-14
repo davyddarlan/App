@@ -4,6 +4,7 @@ import { NavController, NavParams , AlertController } from 'ionic-angular';
 import { Itens } from '../../classes/itens/itens';
 import { RessourcePage } from '../ressource/ressource';
 import { Item } from '../../classes/item/item';
+import { Transfer } from '../../classes/transfer/transfer';
 
 @Component({
   selector: 'page-home',
@@ -14,6 +15,7 @@ export class HomePage {
 
   constructor(
     private itens: Itens, 
+    private transfer: Transfer,
     private nav: NavController
   ) {}
 
@@ -22,5 +24,17 @@ export class HomePage {
       id: item.getId(),
       title: item.getTitle()
     });
+  }
+
+  download(item: Item): void {
+    this.transfer.download(item);
+  }
+
+  cancel(item: Item): void {
+    this.transfer.cancel(item);
+  } 
+
+  remove(item: Item): void {
+    this.transfer.remove(item);
   }
 }
