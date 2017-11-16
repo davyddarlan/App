@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, NgZone } from '@angular/core';
 import { Zip } from '@ionic-native/zip';
 import { FileTransfer, FileTransferObject } from '@ionic-native/file-transfer';
 import { File } from '@ionic-native/file';
@@ -17,7 +17,8 @@ export class Transfer {
         private file: File,
         private toastCtrl: ToastController,
         private zip: Zip,
-        private persistence: Persistence
+        private persistence: Persistence,
+        private zone: NgZone
     ){}
 
     download(item: Item): void {
@@ -43,6 +44,7 @@ export class Transfer {
             }
             item.setStatus('BAIXAR');
         });
+        this.progressTransfer(item);
     }
 
     cancel(item: Item): void {
@@ -61,9 +63,11 @@ export class Transfer {
 
     private progressTransfer(item: Item): void {
         item.getFileTransfer().onProgress((progressEvent) => {
-            if (progressEvent.lengthComputable) {
-                item.setProgress(Math.floor((progressEvent.loaded / progressEvent.total) * 100));
-            }
+            this.zone.run(() => {
+                if (progressEvent.lengthComputable) {
+                    item.setProgress(Math.floor((progressEvent.loaded / progressEvent.total) * 100));
+                }
+            });
         });
     }
 
