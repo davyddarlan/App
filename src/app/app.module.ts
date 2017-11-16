@@ -9,6 +9,7 @@ import { FileTransfer } from '@ionic-native/file-transfer';
 import { File } from '@ionic-native/file';
 import { Zip } from '@ionic-native/zip';
 import { Httpd } from '@ionic-native/httpd';
+import { Media } from '@ionic-native/media';
 
 import { MyApp } from './app.component';
 import { ComponentsModule } from '../components/components.module';
@@ -57,6 +58,7 @@ import { Extra } from '../classes/extra/extra';
     File,
     Zip,
     Httpd,
+    Media,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })

@@ -27,7 +27,7 @@
           <p>{{ item.getProgress() }}%</p>
         </div>
         <div class="open" *ngIf="item.getStatus() == 'ABRIR'">
-          <div class="open-button">
+          <div class="open-button" (click)="openRessource(item)">
             <ion-icon name="md-open"></ion-icon>
           </div>
           <div class="delete-button" (click)="remove(item)">

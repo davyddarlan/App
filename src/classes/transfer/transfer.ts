@@ -53,15 +53,16 @@ export class Transfer {
     }
 
     remove(item: Item): void {
-        this.file.removeRecursively(this.file.externalApplicationStorageDirectory, item.getId()).then(() => {
+        this.file.removeRecursively(this.file.externalApplicationStorageDirectory, item.getId() + '').then(() => {
             item.setStatus('BAIXAR');
             this.alertStatusTransfer('O recurso foi removido.');
         }).catch(data => {
-            this.alertStatusTransfer(data.message);
+            this.alertStatusTransfer('O recurso não pôde ser removido! Tente novamente.');
         });
     }
 
     private progressTransfer(item: Item): void {
+        item.setProgress(0);
         item.getFileTransfer().onProgress((progressEvent) => {
             this.zone.run(() => {
                 if (progressEvent.lengthComputable) {
