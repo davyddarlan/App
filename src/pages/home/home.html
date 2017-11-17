@@ -23,7 +23,7 @@
           <div class="button-progress">
             <ion-icon name="md-close-circle"></ion-icon>
           </div>
-          <div class="progress-load"></div>
+          <unasus-progress [progress]="item.getProgress()"></unasus-progress>
           <p>{{ item.getProgress() }}%</p>
         </div>
         <div class="open" *ngIf="item.getStatus() == 'ABRIR'">

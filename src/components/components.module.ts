@@ -1,8 +1,13 @@
-import { NgModule } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { UnasusPlayerComponent } from './unasus-player/unasus-player';
+import { UnasusProgressComponent } from './unasus-progress/unasus-progress';
+
 @NgModule({
-	declarations: [UnasusPlayerComponent],
+	declarations: [UnasusPlayerComponent,
+    UnasusProgressComponent],
 	imports: [],
-	exports: [UnasusPlayerComponent]
+	schemas: [CUSTOM_ELEMENTS_SCHEMA],
+	exports: [UnasusPlayerComponent,
+    UnasusProgressComponent]
 })
 export class ComponentsModule {}

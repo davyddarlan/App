@@ -112,15 +112,6 @@ page-home .button-progress {
     height: 100%;
 }
 
-page-home .progress-load {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    background:rgba(0, 0, 0, .2);
-    width: 100%;
-    height: 0%;
-}
-
 page-home .progress p {
     position: absolute;
     width: 100%;
@@ -128,7 +119,7 @@ page-home .progress p {
     font-weight: lighter;
     color: rgba(255, 255, 255, .4);
     font-size: .8em;
-} 
+}
 
 //área open
 page-home .open {
