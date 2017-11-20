@@ -1,3 +1,81 @@
 page-login {
-
+    box-sizing: border-box;
+    position: relative;
+    width: 100%;
+    height: 100%;
 }
+
+page-login .login-page {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    overflow: hidden;
+    z-index: -100;
+}
+
+page-login video {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    min-width: 100%;
+    min-height: 100%;
+    width: auto;
+    height: auto;
+    z-index: -100;
+    transform: translateX(-50%) translateY(-50%);
+}
+
+page-login .filter-background {
+    position: absolute;
+    z-index: 100;
+    width: 100%;
+    height: 100%;
+    background: #125dab;
+    opacity: 0.7;
+}
+
+page-login .content {
+    position: absolute;
+    z-index: 101;
+    width: 100%;
+    height: 100%;
+    color: #ffffff;
+    text-align: center;
+}
+
+page-login .content h1 {
+    padding: 10%;
+    margin-top: 30%;
+    font-size: 2.9em;
+}
+
+page-login .content button {
+    position: absolute;
+    bottom: 10%;
+    left: 0;
+    margin-left: calc((100% - 80%) / 2);
+    width: 80%;
+    height: 10%;
+    margin-top: 50%;
+    color: #ffffff;
+    background: #00b1f0;
+    font-size: 1.4em;
+    border: none;
+}
+
+page-login .content button:active {
+    background: #3590b1;
+}
+
+@media all and (orientation:landscape) {
+    page-login .content h1 {
+        margin-top: 6%;
+    }
+
+    page-login .content button {
+        height: 15%;
+    }
+}
+

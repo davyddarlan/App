@@ -37,4 +37,4 @@ export class HomePage {
   remove(item: Item): void {
     this.transfer.remove(item);
   }
-}
+ }
