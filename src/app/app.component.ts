@@ -15,11 +15,10 @@ import { LoginPage } from '../pages/login/login';
 export class MyApp {
   rootPage: any;
 
-  /*private options: HttpdOptions = {
+  private options: HttpdOptions = {
     www_root: this.file.externalApplicationStorageDirectory.replace('file://', ''),
-    localhost_only: false,
-    port: 8080
-  };*/
+    localhost_only: true
+  };
 
   constructor(
     platform: Platform, 
@@ -34,7 +33,7 @@ export class MyApp {
       this.splashScreen.hide();
     });
 
-    //this.httpd.startServer(this.options).subscribe((data) => {});
+    this.httpd.startServer(this.options).subscribe((data) => {});
 
     if (this.persistence.verifyPersistence('isLoged')) {
       this.rootPage = HomePage;

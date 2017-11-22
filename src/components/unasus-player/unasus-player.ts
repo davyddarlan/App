@@ -1,7 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 
-//import { Player } from './player';
 import { SE_UNASUS_PLAYER_API } from './player_localstore';
 
 @Component({

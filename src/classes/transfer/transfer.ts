@@ -48,8 +48,8 @@ export class Transfer {
     }
 
     cancel(item: Item): void {
+        item.setStatus('BAIXAR');
         item.getFileTransfer().abort();
-        item.setStatus('CANCELADO');
     }
 
     remove(item: Item): void {

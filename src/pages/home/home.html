@@ -11,10 +11,12 @@
   </ion-refresher>
   <div id="list-items" padding>
     <div class="list-item" *ngFor="let item of itens.getItens()">
-      <div class="list-img">
-        <img src="assets/imgs/thumbnail-totoro.png">
+      <div  (click)="openRessource(item)">
+        <div class="list-img">
+          <img src="assets/imgs/thumbnail-totoro.png">
+        </div>
+        <p>{{ item.title }}</p>
       </div>
-      <p>{{ item.title }}</p>
       <div class="list-buttons">
         <div class="download" *ngIf="item.getStatus() == 'BAIXAR'" (click)="download(item)"> 
           <button><ion-icon name="md-download"></ion-icon></button>
@@ -27,9 +29,6 @@
           <p>{{ item.getProgress() }}%</p>
         </div>
         <div class="open" *ngIf="item.getStatus() == 'ABRIR'">
-          <div class="open-button" (click)="openRessource(item)">
-            <ion-icon name="md-open"></ion-icon>
-          </div>
           <div class="delete-button" (click)="remove(item)">
             <ion-icon name="md-trash"></ion-icon>
           </div>
