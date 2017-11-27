@@ -2,19 +2,19 @@ import { Injectable } from '@angular/core';
 
 @Injectable()
 export class Extra {
-    dataToString(data: any[]): string {
-        return JSON.stringify(data);
-    }
-
-    dataToObject(data: string): object[] {
-        return JSON.parse(data);
-    }
-
-    directoryName(url: string): string {
-        let pack: any = url.split('/');
-        pack = pack[pack.length - 1];
-        pack = pack.split('.');
-        pack = pack[0];
-        return pack;
+    stringify(obj, prop) {
+        var placeholder = '____PLACEHOLDER____';
+        var fns = [];
+        var json = JSON.stringify(obj, function(key, value) {
+            if (typeof value === 'function') {
+            fns.push(value);
+            return placeholder;
+            }
+            return value;
+        }, 2);
+        json = json.replace(new RegExp('"' + placeholder + '"', 'g'), function(_) {
+            return fns.shift();
+        });
+        return 'this["' + prop + '"] = ' + json + ';';
     }
 }

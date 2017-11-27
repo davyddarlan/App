@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="unasus.saude-da-pessoa-idosa" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<widget id="br.unasus.Idoso" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <name>Saúde da Pessoa Idosa</name>
     <description>Acesso a ferramentas educacionais voltadas para a saúde do idoso.</description>
     <author email="davydgomes27@gmail.com" href="http://davyddarlan.com">Davyd Darlan</author>
