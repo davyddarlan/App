@@ -1,6 +1,5 @@
 import { FileTransferObject } from '@ionic-native/file-transfer';
 import { Persistence } from '../../classes/persistence/persistence';
-import { Extra } from '../../classes/extra/extra';
 
 export class Item {
     private title: string = null;

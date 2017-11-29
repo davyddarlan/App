@@ -10,8 +10,6 @@ import { Extra } from './../classes/extra/extra';
 import { HomePage } from '../pages/home/home';
 import { LoginPage } from '../pages/login/login';
 
-import { SE_UNASUS_PLAYER_API } from './../classes/ppu/ppu';
-
 @Component({
   templateUrl: 'app.html'
 })
@@ -39,16 +37,18 @@ export class MyApp {
 
     //this.httpd.startServer(this.options).subscribe((data) => {});
 
-    if (this.persistence.verifyPersistence('isLoged')) {
+    if (!this.persistence.verifyPersistence('isLoged')) {
       this.rootPage = HomePage;
     } else {
       this.rootPage = LoginPage;
     }
 
-    //ouvindo 
-    window.addEventListener('message', function(response) {
-      response.source.postMessage(JSON.stringify(SE_UNASUS_PLAYER_API), response.origin);
-      console.log('frame: ' + response.data);
+    //verificar todas as ações que acontecem nos recursos educacionais
+    window.addEventListener('message', (response) => {
+      if (response.data == 'open') {
+        response.source.postMessage('remove', 'http://localhost:8080');
+      }
+      console.log(response.data);
     });
   }
 }

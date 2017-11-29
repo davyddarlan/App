@@ -5,7 +5,6 @@ import { File } from '@ionic-native/file';
 import { ToastController } from 'ionic-angular';
 
 import { Persistence } from '../../classes/persistence/persistence';
-import { Extra } from '../../classes/extra/extra';
 import { Item } from '../../classes/item/item';
 
 @Injectable()
