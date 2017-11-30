@@ -6,6 +6,7 @@ import { Httpd, HttpdOptions } from '@ionic-native/httpd';
 import { File } from '@ionic-native/file';
 import { Persistence } from './../classes/persistence/persistence';
 import { Extra } from './../classes/extra/extra';
+import { Login } from './../classes/login/login';
 
 import { HomePage } from '../pages/home/home';
 import { LoginPage } from '../pages/login/login';
@@ -16,10 +17,10 @@ import { LoginPage } from '../pages/login/login';
 export class MyApp {
   rootPage: any;
 
-  /*private options: HttpdOptions = {
+  private options: HttpdOptions = {
     www_root: this.file.externalApplicationStorageDirectory.replace('file://', ''),
     localhost_only: true
-  };*/
+  };
 
   constructor(
     platform: Platform, 
@@ -28,16 +29,17 @@ export class MyApp {
     private httpd: Httpd,
     private file: File,
     private persistence: Persistence,
-    private extra: Extra
+    private extra: Extra,
+    private login: Login
   ) {
     platform.ready().then(() => {
       this.statusBar.backgroundColorByHexString('#00b1f0');
       this.splashScreen.hide();
     });
 
-    //this.httpd.startServer(this.options).subscribe((data) => {});
+    this.httpd.startServer(this.options).subscribe((data) => {});
 
-    if (!this.persistence.verifyPersistence('isLoged')) {
+    if (this.login.isLoged()) {
       this.rootPage = HomePage;
     } else {
       this.rootPage = LoginPage;
@@ -46,9 +48,8 @@ export class MyApp {
     //verificar todas as ações que acontecem nos recursos educacionais
     window.addEventListener('message', (response) => {
       if (response.data == 'open') {
-        response.source.postMessage('remove', 'http://localhost:8080');
+        response.source.postMessage('remove', 'http://localhost:8888');
       }
-      console.log(response.data);
     });
   }
 }

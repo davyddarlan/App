@@ -4,7 +4,6 @@ import { Network } from '@ionic-native/network';
 
 import { Cache } from '../../classes/cache/cache';
 import { Item } from '../../classes/item/item';
-import * as Config from '../../classes/config/config';
 
 interface DataItens {
     itens: object[],
@@ -35,7 +34,7 @@ export class Itens {
         let itemList = []; let item: Item;
         //cenário com conexão à internet
         if (this.network.type != 'none') {
-            this.http.get<DataItens>(Config.URL_RESSOURCES).subscribe(data => {
+            this.http.get<DataItens>('https://teste2.unasus.gov.br/MServer3/api/appsus/v1/acervo/itens').subscribe(data => {
                 for (let i of data.itens) {
                     let title = i['titulo']; let date = i['data_alteracao']; 
                     let id = i['codigo']; let file = i['arquivo'];

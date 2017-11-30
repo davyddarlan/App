@@ -10,6 +10,8 @@ import { File } from '@ionic-native/file';
 import { Zip } from '@ionic-native/zip';
 import { Httpd } from '@ionic-native/httpd';
 import { Media } from '@ionic-native/media';
+import { InAppBrowser } from '@ionic-native/in-app-browser';
+import { Device } from '@ionic-native/device';
 
 import { MyApp } from './app.component';
 import { ComponentsModule } from '../components/components.module';
@@ -23,7 +25,9 @@ import { Itens } from '../classes/itens/itens';
 import { Cache } from '../classes/cache/cache';
 import { Transfer } from '../classes/transfer/transfer';
 import { Extra } from '../classes/extra/extra';
- 
+import { Login } from '../classes/login/login';
+import { MServer } from '../classes/mserver/mserver';
+  
 @NgModule({
   declarations: [
     MyApp,
@@ -54,7 +58,11 @@ import { Extra } from '../classes/extra/extra';
     Cache,
     Transfer,
     FileTransfer,
+    InAppBrowser,
     Extra,
+    Login,
+    MServer,
+    Device,
     File,
     Zip,
     Httpd,

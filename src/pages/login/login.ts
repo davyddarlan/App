@@ -2,21 +2,28 @@ import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { HomePage } from '../home/home';
 
+import { Login } from '../../classes/login/login';
+
 @Component({
   selector: 'page-login',
   templateUrl: 'login.html',
 })
 export class LoginPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
-  }
-
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad LoginPage');
-  }
+  constructor(
+    private navCtrl: NavController, 
+    private navParams: NavParams,
+    private login: Login
+  ) {}
 
   goHome() {
-    this.navCtrl.push(HomePage);
+    this.login.login();
+    this.login.isLogin.subscribe((result) => {
+      if (result) {
+        this.navCtrl.push(HomePage);
+      } else {
+        //ação de erro
+      }
+    });
   }
-
 }

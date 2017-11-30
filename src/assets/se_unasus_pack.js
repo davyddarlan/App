@@ -8,7 +8,7 @@ window.addEventListener('message', function(response) {
 	}
 });
 
-var SE_UNASUS_PLAYER_API = {
+window['SE_UNASUS_PLAYER_API'] = {
     _STATE: {
         NOT_INITIALIZED: -1,
         RUNNING: 0,
