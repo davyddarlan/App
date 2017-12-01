@@ -20,7 +20,7 @@ export class Transfer {
         private zone: NgZone
     ){}
 
-    download(item: Item): void {
+    public download(item: Item): void {
         item.setStatus('BAIXANDO');
         item.setFileTransfer(this.transfer.create());
         item.getFileTransfer().download(item.getFile(), this.file.externalApplicationStorageDirectory + item.getId() + '.zip')
@@ -49,12 +49,12 @@ export class Transfer {
         this.progressTransfer(item);
     }
 
-    cancel(item: Item): void {
+    public cancel(item: Item): void {
         item.setStatus('BAIXAR');
         item.getFileTransfer().abort();
     }
 
-    remove(item: Item): void {
+    public remove(item: Item): void {
         this.file.removeRecursively(this.file.externalApplicationStorageDirectory, item.getId() + '').then(() => {
             item.setStatus('BAIXAR');
             this.alertStatusTransfer('O recurso foi removido.');

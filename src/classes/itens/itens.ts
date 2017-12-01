@@ -22,7 +22,7 @@ export class Itens {
         this.requestItens();
     }
 
-    getItens(): Item[] {
+    public getItens(): Item[] {
         return this.listItens;
     }
 

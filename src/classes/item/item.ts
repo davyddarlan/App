@@ -16,39 +16,39 @@ export class Item {
         this.file = file;
     }
 
-    getTitle(): string {
+    public getTitle(): string {
         return this.title;
     }
 
-    getDate(): string {
+    public getDate(): string {
         return this.date;
     }
 
-    setFileTransfer(file: FileTransferObject): void {
+    public setFileTransfer(file: FileTransferObject): void {
         this.fileTrasfer = file;
     }
 
-    getFileTransfer(): FileTransferObject {
+    public getFileTransfer(): FileTransferObject {
         return this.fileTrasfer;
     }
 
-    getFile(): string {
+    public getFile(): string {
         return this.file;
     }
 
-    getId(): string {
+    public getId(): string {
         return this.id;
     }
 
-    setProgress(time: number) {
+    public setProgress(time: number) {
         this.progress = time;
     }
 
-    getProgress(): number {
+    public getProgress(): number {
         return this.progress;
     }
 
-    setStatus(status: string): void {
+    public setStatus(status: string): void {
         let persistence = new Persistence;
         if(persistence.verifyPersistence(status)) {
             let obj = JSON.parse(persistence.getPersistence(this.getId()));
@@ -60,7 +60,7 @@ export class Item {
         }
     }
 
-    getStatus(): string {
+    public getStatus(): string {
         let persistence = new Persistence;
         if (persistence.verifyPersistence(this.getId())) {
             return JSON.parse(persistence.getPersistence(this.getId()))['status'];

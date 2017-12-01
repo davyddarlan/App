@@ -9,7 +9,7 @@ export class MenuPage {
   constructor(private viewCtrl: ViewController) {
   }
 
-  close() {
+  public close(): void {
     this.viewCtrl.dismiss();
   }
 }

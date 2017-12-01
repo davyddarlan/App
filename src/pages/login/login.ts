@@ -16,7 +16,7 @@ export class LoginPage {
     private login: Login
   ) {}
 
-  goHome() {
+  public goHome(): void {
     this.login.login();
     this.login.isLogin.subscribe((result) => {
       if (result) {

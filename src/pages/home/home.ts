@@ -23,14 +23,14 @@ export class HomePage {
     private popoverCtrl: PopoverController
   ) {}
 
-  menu(myEvent) {
+  public menu(myEvent): void {
     let popover = this.popoverCtrl.create(MenuPage);
     popover.present({
       ev: myEvent
     });
   }
 
-  openRessource(item: Item): void {
+  public openRessource(item: Item): void {
     if (item.getStatus() === 'ABRIR') {
       this.nav.push(RessourcePage, {
         id: item.getId(),
@@ -39,15 +39,15 @@ export class HomePage {
     }
   }
 
-  download(item: Item): void {
+  public download(item: Item): void {
     this.transfer.download(item);
   }
 
-  cancel(item: Item): void {
+  public cancel(item: Item): void {
     this.transfer.cancel(item);
   } 
 
-  remove(item: Item): void {
+  public remove(item: Item): void {
     this.alert.create({
       title: 'Remover',
       message: `Você deseja remover o recurso educacional ${ item.getTitle() }?`,

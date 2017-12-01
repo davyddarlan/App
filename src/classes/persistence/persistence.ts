@@ -2,15 +2,15 @@ import { Injectable } from '@angular/core';
 
 @Injectable()
 export class Persistence {
-    setPersistence(name: string, element: any): void {
+    public setPersistence(name: string, element: any): void {
         localStorage.setItem(name, element);
     }
 
-    getPersistence(name: string): any {
+    public getPersistence(name: string): any {
         return localStorage.getItem(name);
     }
 
-    verifyPersistence(name: string): boolean {
+    public verifyPersistence(name: string): boolean {
         let nameOfElement = this.getPersistence(name);
         if (nameOfElement) {
             return true;
@@ -19,7 +19,7 @@ export class Persistence {
         }
     }
 
-    removePersistence(name: string):boolean {
+    public removePersistence(name: string):boolean {
         if (localStorage.removeItem(name)) {
             return true;
         } else {

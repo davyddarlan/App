@@ -8,7 +8,7 @@ export class Cache {
         private persistence: Persistence
     ) {}
 
-    cacheVerify(repositoy: string): boolean {
+    public cacheVerify(repositoy: string): boolean {
         if (this.persistence.verifyPersistence(repositoy)) {
             return true;
         } else {
@@ -16,7 +16,7 @@ export class Cache {
         }
     }
 
-    cacheRegister(repositoy: string, data: string): void {
+    public cacheRegister(repositoy: string, data: string): void {
         if (this.cacheVerify(repositoy)) {
             let currentRepositoryData = hash.md5(this.cacheReturn(repositoy));
             let newRepositoryData = hash.md5(data);
@@ -28,11 +28,11 @@ export class Cache {
         }
     }
 
-    cacheReturn(repositoy: string): any {
+    public cacheReturn(repositoy: string): any {
         return this.persistence.getPersistence(repositoy);
     }
 
-    cacheClear(repositoy: string): boolean {
+    public cacheClear(repositoy: string): boolean {
         if (this.persistence.removePersistence(repositoy)) {
             return true;
         } else {
