@@ -1,0 +1,14 @@
+page-menu ion-list {
+    height: 126px;
+}
+
+page-menu button:first-child {
+    margin-top: -14px;
+}
+
+page-menu p {
+    font-size: 90% !important;
+    background: #f1f1f1 !important;
+    box-shadow: 0.5px -2.5px 5px rgba(0, 0, 0, .10s) inset !important;
+    color: #125dab !important;
+}

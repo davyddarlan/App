@@ -1,10 +1,12 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams , AlertController } from 'ionic-angular';
+import { PopoverController } from 'ionic-angular';
 
 import { Itens } from '../../classes/itens/itens';
 import { RessourcePage } from '../ressource/ressource';
 import { Item } from '../../classes/item/item';
 import { Transfer } from '../../classes/transfer/transfer';
+import { MenuPage } from '../menu/menu';
 
 @Component({
   selector: 'page-home',
@@ -17,8 +19,16 @@ export class HomePage {
     private itens: Itens, 
     private transfer: Transfer,
     private nav: NavController,
-    private alert: AlertController
+    private alert: AlertController,
+    private popoverCtrl: PopoverController
   ) {}
+
+  menu(myEvent) {
+    let popover = this.popoverCtrl.create(MenuPage);
+    popover.present({
+      ev: myEvent
+    });
+  }
 
   openRessource(item: Item): void {
     if (item.getStatus() === 'ABRIR') {

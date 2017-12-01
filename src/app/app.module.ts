@@ -19,6 +19,7 @@ import { ComponentsModule } from '../components/components.module';
 import { HomePage } from '../pages/home/home';
 import { RessourcePage } from '../pages/ressource/ressource';
 import { LoginPage } from '../pages/login/login';
+import { MenuPage } from '../pages/menu/menu';
 
 import { Persistence } from '../classes/persistence/persistence';
 import { Itens } from '../classes/itens/itens';
@@ -33,7 +34,8 @@ import { MServer } from '../classes/mserver/mserver';
     MyApp,
     HomePage,
     RessourcePage,
-    LoginPage
+    LoginPage,
+    MenuPage
   ],
   imports: [
     BrowserModule,
@@ -47,7 +49,8 @@ import { MServer } from '../classes/mserver/mserver';
     MyApp,
     HomePage,
     RessourcePage,
-    LoginPage
+    LoginPage,
+    MenuPage
   ],
   providers: [
     StatusBar,
