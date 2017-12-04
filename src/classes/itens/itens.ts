@@ -1,5 +1,5 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { Injectable, EventEmitter } from '@angular/core';
 import { Network } from '@ionic-native/network';
 
 import { Cache } from '../../classes/cache/cache';
@@ -13,6 +13,7 @@ interface DataItens {
 @Injectable()
 export class Itens {
     private listItens: Item[];
+    private request: EventEmitter<any> = new EventEmitter();
 
     constructor(
         private http: HttpClient,
@@ -20,6 +21,10 @@ export class Itens {
         private network: Network
     ) {
         this.requestItens();
+    }
+
+    public on(): any {
+        return this.request;
     }
 
     public getItens(): Item[] {
@@ -30,19 +35,16 @@ export class Itens {
         this.listItens = item;
     }
 
-    private requestItens() {
+    public requestItens() {
         let itemList = []; let item: Item;
-        //cenário com conexão à internet
         if (this.network.type != 'none') {
-            this.http.get<DataItens>('https://teste2.unasus.gov.br/MServer3/api/appsus/v1/acervo/itens').subscribe(data => {
+            this.http.get<DataItens>
+            ('https://teste2.unasus.gov.br/MServer3/api/appsus/v1/acervo/itens').subscribe(data => {
+                this.request.emit();
                 for (let i of data.itens) {
                     let title = i['titulo']; let date = i['data_alteracao']; 
                     let id = i['codigo']; let file = i['arquivo'];
                     item = new Item(title, date, id, file);
-                    /*
-                        Cada iteração é enviada para o objeto item e apenas
-                        as partes essencias serão persistidas. 
-                    */
                     this.cache.cacheRegister(id + '_item', JSON.stringify({
                         title: title,
                         date: date,
@@ -55,7 +57,7 @@ export class Itens {
                 this.setItens(itemList);
             });
         } else {
-            //cenário offline
+            this.request.emit();
             if (this.cache.cacheVerify('qtd_items')) {
                 let qtd_items = this.cache.cacheReturn('qtd_items');
                 for (let i = 0; i <= qtd_items; i++) {
@@ -65,7 +67,7 @@ export class Itens {
                     itemList.push(item);
                 }
                 this.setItens(itemList);
-            }
+            } 
         }
     }
 }

@@ -8,12 +8,21 @@ export class Item {
     private id: string = null;
     private file: string = null;
     private progress: number = 0;
+    private static refresh: boolean = false;
 
     constructor(title: string, date: string, id: string, file: string) {
         this.title = title;
         this.date = date;
         this.id = id;
         this.file = file;
+    }
+
+    public static getRefresh(): boolean {
+        return Item.refresh;
+    }
+
+    public static setRefresh(state: boolean): void {
+        Item.refresh = state;
     }
 
     public getTitle(): string {

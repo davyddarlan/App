@@ -11,7 +11,7 @@
   </ion-navbar>
 </ion-header>
 <ion-content>
-  <ion-refresher>
+  <ion-refresher (ionRefresh)="refresh($event)">
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
   <div id="list-items" padding>

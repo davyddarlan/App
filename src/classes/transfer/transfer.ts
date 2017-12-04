@@ -1,4 +1,4 @@
-import { Injectable, NgZone } from '@angular/core';
+import { Injectable, NgZone, EventEmitter } from '@angular/core';
 import { Zip } from '@ionic-native/zip';
 import { FileTransfer, FileTransferObject } from '@ionic-native/file-transfer';
 import { File } from '@ionic-native/file';
@@ -10,6 +10,7 @@ import { Item } from '../../classes/item/item';
 @Injectable()
 export class Transfer {
     private fileTransfer: FileTransferObject;
+    private downloadState: EventEmitter<any> = new EventEmitter();
 
     constructor(
         private transfer: FileTransfer, 
@@ -20,11 +21,16 @@ export class Transfer {
         private zone: NgZone
     ){}
 
+    public on(): any {
+        return this.downloadState;
+    }
+
     public download(item: Item): void {
         item.setStatus('BAIXANDO');
         item.setFileTransfer(this.transfer.create());
         item.getFileTransfer().download(item.getFile(), this.file.externalApplicationStorageDirectory + item.getId() + '.zip')
         .then((entry) => {
+            this.downloadState.emit();
             this.zip.unzip(this.file.externalApplicationStorageDirectory + item.getId() + '.zip', 
             this.file.externalApplicationStorageDirectory + item.getId())
             .then(result => {
@@ -41,6 +47,7 @@ export class Transfer {
                 }
             });
         }).catch((err) => {
+            this.downloadState.emit();
             if (err.code != 4) {
                 this.alertStatusTransfer('Veja se você está conectado a internet.');
             }
@@ -74,7 +81,7 @@ export class Transfer {
         });
     }
 
-    private alertStatusTransfer(message: any = null) {
+    private alertStatusTransfer(message: any = null): void {
         this.toastCtrl.create({
             message: message,
             duration: 3500,

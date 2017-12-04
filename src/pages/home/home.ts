@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams , AlertController } from 'ionic-angular';
-import { PopoverController } from 'ionic-angular';
+import { PopoverController, ToastController } from 'ionic-angular';
+import { Network } from '@ionic-native/network';
 
 import { Itens } from '../../classes/itens/itens';
 import { RessourcePage } from '../ressource/ressource';
@@ -14,14 +15,21 @@ import { MenuPage } from '../menu/menu';
 })
 export class HomePage {
   private title: string = 'App SUS';
+  private countDonwload = 0;
 
   constructor(
     private itens: Itens, 
     private transfer: Transfer,
     private nav: NavController,
     private alert: AlertController,
-    private popoverCtrl: PopoverController
-  ) {}
+    private popoverCtrl: PopoverController,
+    private toastCtrl: ToastController,
+    private network: Network
+  ) {
+    this.transfer.on().subscribe(() => {
+      this.countDonwload--;
+    });
+  }
 
   public menu(myEvent): void {
     let popover = this.popoverCtrl.create(MenuPage);
@@ -40,28 +48,62 @@ export class HomePage {
   }
 
   public download(item: Item): void {
-    this.transfer.download(item);
+    if (!Item.getRefresh()) {
+      this.transfer.download(item);
+      this.countDonwload++;
+    } else {
+      this.toastCtrl.create({
+        message: 'Aguarde a atualização da lista.',
+        duration: 2000,
+        position: 'bottom',
+        showCloseButton: true,
+        closeButtonText: 'ok'
+      }).present();
+    }
   }
 
   public cancel(item: Item): void {
     this.transfer.cancel(item);
+    this.countDonwload--;
   } 
 
   public remove(item: Item): void {
     this.alert.create({
       title: 'Remover',
       message: `Você deseja remover o recurso educacional ${ item.getTitle() }?`,
-      buttons: [
-        {
-          text: 'Sim',
-          handler: () => {
-            this.transfer.remove(item);
-          }
-        },
-        {
-          text: 'Não'
-        }
-      ]
+      buttons: [{ text: 'Sim', handler: () => { this.transfer.remove(item); } }, { text: 'Não' }]
+    }).present();
+  }
+
+  public refresh(refresher: any): void {
+    if (this.network.type != 'none') {
+      if (this.countDonwload == 0) {
+        Item.setRefresh(true);
+        this.itens.requestItens();
+        this.itens.on().subscribe((data) => {
+          Item.setRefresh(false);
+          refresher.complete();
+        });
+      } else {
+        refresher.complete();
+        this.toastAlert('Aguarde os recursos serem baixados para atualizar a lista.', 2000);
+      }
+      setTimeout(() => {
+        refresher.complete();
+      }, 4000);
+    } else {
+      refresher.complete();
+      this.toastAlert('Não foi possível atualizar a lista, verifique se você está conectado em um rede', 2000);
+    }
+  }
+
+  private toastAlert(message: string, time: number): void {
+    this.toastCtrl.create({
+      message: message,
+      duration: time,
+      position: 'bottom',
+      showCloseButton: true,
+      closeButtonText: 'ok'
     }).present();
   }
  }
