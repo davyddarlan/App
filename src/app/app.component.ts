@@ -17,10 +17,10 @@ import { LoginPage } from '../pages/login/login';
 export class MyApp {
   rootPage: any;
 
-  /*private options: HttpdOptions = {
+  private options: HttpdOptions = {
     www_root: this.file.externalApplicationStorageDirectory.replace('file://', ''),
     localhost_only: true
-  };*/
+  };
 
   constructor(
     platform: Platform, 
@@ -37,15 +37,14 @@ export class MyApp {
       this.splashScreen.hide();
     });
 
-    //this.httpd.startServer(this.options).subscribe((data) => {});
+    this.httpd.startServer(this.options).subscribe((data) => {});
 
-    if (!this.login.isLoged()) {
+    if (this.login.isLoged()) {
       this.rootPage = HomePage;
     } else {
       this.rootPage = LoginPage;
     }
-
-    //verificar todas as ações que acontecem nos recursos educacionais
+    
     window.addEventListener('message', (response) => {
       if (response.data == 'open') {
         response.source.postMessage('remove', 'http://localhost:8888');

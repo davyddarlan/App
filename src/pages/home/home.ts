@@ -15,7 +15,7 @@ import { MenuPage } from '../menu/menu';
 })
 export class HomePage {
   private title: string = 'App SUS';
-  private countDonwload = 0;
+  private static countDonwload: number = 0;
 
   constructor(
     private itens: Itens, 
@@ -26,9 +26,9 @@ export class HomePage {
     private toastCtrl: ToastController,
     private network: Network
   ) {
-    this.transfer.on().subscribe(() => {
-      this.countDonwload--;
-    });
+    /*this.transfer.on().subscribe(() => {
+      HomePage.countDonwload--;
+    });*/
   }
 
   public menu(myEvent): void {
@@ -50,7 +50,8 @@ export class HomePage {
   public download(item: Item): void {
     if (!Item.getRefresh()) {
       this.transfer.download(item);
-      this.countDonwload++;
+      HomePage.countDonwload++;
+      alert(HomePage.countDonwload);
     } else {
       this.toastCtrl.create({
         message: 'Aguarde a atualização da lista.',
@@ -64,7 +65,8 @@ export class HomePage {
 
   public cancel(item: Item): void {
     this.transfer.cancel(item);
-    this.countDonwload--;
+    HomePage.countDonwload--;
+    alert(HomePage.countDonwload);
   } 
 
   public remove(item: Item): void {
@@ -77,7 +79,7 @@ export class HomePage {
 
   public refresh(refresher: any): void {
     if (this.network.type != 'none') {
-      if (this.countDonwload == 0) {
+      if (HomePage.countDonwload == 0) {
         Item.setRefresh(true);
         this.itens.requestItens();
         this.itens.on().subscribe((data) => {

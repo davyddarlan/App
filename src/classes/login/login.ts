@@ -18,7 +18,12 @@ export class Login {
     ) {}
 
     public login() {
-        var config = 'clearcache=yes,clearsessioncache=yes,hardwareback=no,location=no,toolbar=yes,toolbarposition=top'; 
+        var config = `
+            clearcache=yes,clearsessioncache=yes,
+            hardwareback=no,location=no,
+            toolbar=yes,
+            toolbarposition=top
+        `; 
         var browser = this.browser.create(this.mserver.register(this.device.uuid), '_blank', config);
         browser.on('loadstop').subscribe(() => {
             browser.executeScript({
@@ -39,6 +44,15 @@ export class Login {
 
     public isLoged(): boolean {
         return this.persistence.verifyPersistence('session');
+    }
+
+    public username(): string {
+        var username = JSON.parse(this.persistence.getPersistence('session'))['UNASUS_ACESSO_NOME'];
+        return username;
+    }
+
+    public logout(): void {
+        this.persistence.removePersistence('session');
     }
 
     private getScript(): string {

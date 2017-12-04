@@ -28,7 +28,8 @@ export class Transfer {
     public download(item: Item): void {
         item.setStatus('BAIXANDO');
         item.setFileTransfer(this.transfer.create());
-        item.getFileTransfer().download(item.getFile(), this.file.externalApplicationStorageDirectory + item.getId() + '.zip')
+        item.getFileTransfer().download(item.getFile(), this.file.externalApplicationStorageDirectory 
+        + item.getId() + '.zip')
         .then((entry) => {
             this.downloadState.emit();
             this.zip.unzip(this.file.externalApplicationStorageDirectory + item.getId() + '.zip', 
@@ -37,7 +38,8 @@ export class Transfer {
                 if (result == 0) {
                     item.setStatus('ABRIR');
                     this.file.removeFile(this.file.externalApplicationStorageDirectory, item.getId() + '.zip');
-                    this.file.removeFile(this.file.externalApplicationStorageDirectory + item.getId(), 'se_unasus_pack.js');
+                    this.file.removeFile(this.file.externalApplicationStorageDirectory + item.getId(), 
+                    'se_unasus_pack.js');
                     this.file.copyFile(this.file.applicationDirectory + 'www/assets', 'se_unasus_pack.js', 
                     this.file.externalApplicationStorageDirectory + item.getId(), 'se_unasus_pack.js');
                     this.alertStatusTransfer('Você já pode acessar o recurso educacional.');

@@ -20,10 +20,8 @@ export class LoginPage {
     this.login.login();
     this.login.isLogin.subscribe((result) => {
       if (result) {
-        this.navCtrl.push(HomePage);
-      } else {
-        //ação de erro
-      }
+        this.navCtrl.setRoot(HomePage);
+      } 
     });
   }
 }
