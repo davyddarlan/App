@@ -9,6 +9,8 @@ import { Login } from './../classes/login/login';
 import { HomePage } from '../pages/home/home';
 import { LoginPage } from '../pages/login/login';
 
+import { PPUCommunication } from '../classes/ppuCommunication/ppuCommunication';
+
 @Component({
   templateUrl: 'app.html'
 })
@@ -24,21 +26,18 @@ export class MyApp {
     private login: Login
   ) {
     platform.ready().then(() => {
-      this.statusBar.backgroundColorByHexString('#00b1f0');
+      this.statusBar.backgroundColorByHexString('#00B1F0');
       this.splashScreen.hide();
     });
 
-    if (this.login.isLoged()) {
+    if (!this.login.isLoged()) {
       this.rootPage = HomePage;
     } else {
       this.rootPage = LoginPage;
     }
-    
-    window.addEventListener('message', (response) => {
-      if (response.data == 'open') {
-        response.source.postMessage('remove', 'http://localhost:8888');
-      }
-    });
+
+    let communication = new PPUCommunication();
+    communication.registerCommunication();
   }
 }
 

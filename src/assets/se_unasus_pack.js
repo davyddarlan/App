@@ -1,13 +1,3 @@
-window.addEventListener('load', function() {
-	window.parent.postMessage('open', '*');
-});
-
-window.addEventListener('message', function(response) {
-	if (response.data = 'remove') {
-		console.log('executar remoção');
-	}
-});
-
 window['SE_UNASUS_PLAYER_API'] = {
     _STATE: {
         NOT_INITIALIZED: -1,
@@ -77,18 +67,15 @@ window['SE_UNASUS_PLAYER_API'] = {
         return true;
     },
 	getItem: function(Item) {
-		return JSON.parse(localStorage.getItem(Item));
+		return null;
 	},
 	setItem: function(Item, Valor) {
-		localStorage.setItem(Item, JSON.stringify(Valor));
 		var obj  = {
-			type: 'ppu',
+			type: 0,
 			name: Item, 
 			valor: Valor
 		}
-		window.addEventListener('load', function() {
-			window.parent.postMessage(JSON.stringify(obj), '*');
-		});
+		window.parent.postMessage(JSON.stringify(obj), '*');
 	},
     getPlayerUser: function () {
         return this.user_info;

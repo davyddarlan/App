@@ -1,0 +1,1 @@
+export enum ActionCommunication { PPU, APPLICATION };

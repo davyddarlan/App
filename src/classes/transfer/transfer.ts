@@ -36,12 +36,13 @@ export class Transfer {
             this.file.externalApplicationStorageDirectory + item.getId())
             .then(result => {
                 if (result == 0) {
-                    item.setStatus('ABRIR');
+                    //item.setStatus('ABRIR');
                     this.file.removeFile(this.file.externalApplicationStorageDirectory, item.getId() + '.zip');
                     this.file.removeFile(this.file.externalApplicationStorageDirectory + item.getId(), 
                     'se_unasus_pack.js');
                     this.file.copyFile(this.file.applicationDirectory + 'www/assets', 'se_unasus_pack.js', 
                     this.file.externalApplicationStorageDirectory + item.getId(), 'se_unasus_pack.js');
+                    item.setStatus('ABRIR');
                     this.alertStatusTransfer('Você já pode acessar o recurso educacional.');
                 } else {
                     item.setStatus('BAIXAR');
