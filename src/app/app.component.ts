@@ -2,8 +2,6 @@ import { Component } from '@angular/core';
 import { Platform, NavController } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
-import { Httpd, HttpdOptions } from '@ionic-native/httpd';
-import { File } from '@ionic-native/file';
 import { Persistence } from './../classes/persistence/persistence';
 import { Extra } from './../classes/extra/extra';
 import { Login } from './../classes/login/login';
@@ -17,17 +15,10 @@ import { LoginPage } from '../pages/login/login';
 export class MyApp {
   rootPage: any;
 
-  private options: HttpdOptions = {
-    www_root: this.file.externalApplicationStorageDirectory.replace('file://', ''),
-    localhost_only: true
-  };
-
   constructor(
     platform: Platform, 
     private statusBar: StatusBar, 
     private splashScreen: SplashScreen, 
-    private httpd: Httpd,
-    private file: File,
     private persistence: Persistence,
     private extra: Extra,
     private login: Login
@@ -36,8 +27,6 @@ export class MyApp {
       this.statusBar.backgroundColorByHexString('#00b1f0');
       this.splashScreen.hide();
     });
-
-    this.httpd.startServer(this.options).subscribe((data) => {});
 
     if (this.login.isLoged()) {
       this.rootPage = HomePage;

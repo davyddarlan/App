@@ -25,10 +25,12 @@ export class HomePage {
     private popoverCtrl: PopoverController,
     private toastCtrl: ToastController,
     private network: Network
-  ) {
-    /*this.transfer.on().subscribe(() => {
+  ) {}
+
+  ngOnInit() {
+    this.transfer.on().subscribe(() => {
       HomePage.countDonwload--;
-    });*/
+    }); 
   }
 
   public menu(myEvent): void {
@@ -51,7 +53,6 @@ export class HomePage {
     if (!Item.getRefresh()) {
       this.transfer.download(item);
       HomePage.countDonwload++;
-      alert(HomePage.countDonwload);
     } else {
       this.toastCtrl.create({
         message: 'Aguarde a atualização da lista.',
@@ -66,7 +67,6 @@ export class HomePage {
   public cancel(item: Item): void {
     this.transfer.cancel(item);
     HomePage.countDonwload--;
-    alert(HomePage.countDonwload);
   } 
 
   public remove(item: Item): void {
