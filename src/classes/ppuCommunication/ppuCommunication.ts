@@ -6,7 +6,7 @@ export class PPUCommunication implements Communication {
         window.addEventListener('message', (response) => {
             let data = JSON.parse(response.data);
             if (data['type'] == ActionCommunication.PPU) {
-                alert(data['name']);
+                this.saveCommunicationData(data);
             }
         });
     }

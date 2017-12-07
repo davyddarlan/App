@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { NavController, NavParams , AlertController } from 'ionic-angular';
+import { Component, ViewChild } from '@angular/core';
+import { NavController, NavParams , AlertController, Content } from 'ionic-angular';
 import { PopoverController, ToastController } from 'ionic-angular';
 import { Network } from '@ionic-native/network';
 
@@ -16,6 +16,7 @@ import { MenuPage } from '../menu/menu';
 export class HomePage {
   private title: string = 'App SUS';
   private static countDonwload: number = 0;
+  @ViewChild(Content) content: Content;
 
   constructor(
     private itens: Itens, 
@@ -31,6 +32,7 @@ export class HomePage {
     this.transfer.on().subscribe(() => {
       HomePage.countDonwload--;
     }); 
+    this.content.resize();
   }
 
   public menu(myEvent): void {
@@ -79,7 +81,7 @@ export class HomePage {
 
   public refresh(refresher: any): void {
     if (this.network.type != 'none') {
-      if (HomePage.countDonwload == 0) {
+      if (HomePage.countDonwload <= 0) {
         Item.setRefresh(true);
         this.itens.requestItens();
         this.itens.on().subscribe((data) => {

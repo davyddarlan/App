@@ -1,7 +1,16 @@
-import { Injectable } from '@angular/core';
+import { Injectable, EventEmitter } from '@angular/core';
 import { Persistence } from '../../classes/persistence/persistence';
 import * as sha512 from '../../classes/sha512/sha512';
 import * as crypto from '../../classes/asmcrypto/asmcrypto';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+
+export const URLS = {
+    TIME_SERVER: 'info/TESTE3JSON/0.0.1',
+    PROFILE_USER: 'v1/usuario/perfil',
+    DEVICE_REGISTER: 'v1/usuario/dispositivos',
+    SEND_LOGS: 'v1/usuario/logs',
+    ITENS_RESSOURCE: 'v1/acervo/itens'
+};
 
 @Injectable()
 export class MServer {
@@ -9,9 +18,11 @@ export class MServer {
     private instance: string = 'MServer3/';
     private name: string = 'appsus/';
     private key: string = '67e10d8622f694a453ce3420d7ae6674';
+    private actionApi: EventEmitter<any> = new EventEmitter();
 
     constructor(
-        private persistence: Persistence
+        private persistence: Persistence,
+        private http: HttpClient
     ) {}
 
     public register(key: string): string {
@@ -36,5 +47,21 @@ export class MServer {
             UNASUS_ACESSO_NOME: obj['UNASUS_ACESSO_NOME']
         };
         this.persistence.setPersistence('session', JSON.stringify(returnData));
+    }
+
+    public on(): any {
+        return this.actionApi;
+    }
+
+    public setActionAPI(location: string, data: object = {}): void {
+        let sesssion = JSON.parse(this.persistence.getPersistence('session'));
+        let body = { 
+            UNASUS_USER_ID: sesssion['UNASUS_USER_ID'], 
+            UNASUS_DEVICE_ID: sesssion['UNASUS_DEVICE_ID'], 
+            UNASUS_SIGNATURE: sesssion['UNASUS_SIGNATURE']
+        }
+        this.http.post(this.host + this.instance + 'api/' + this.name + location, Object.assign(body, data)).subscribe((data) => {
+            this.actionApi.emit(JSON.stringify(data));
+        });
     }
 }
