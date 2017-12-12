@@ -10,6 +10,7 @@ import { HomePage } from '../pages/home/home';
 import { LoginPage } from '../pages/login/login';
 
 import { PPUCommunication } from '../classes/ppuCommunication/ppuCommunication';
+import { AppCommunication } from '../classes/appCommunication/appCommunication';
 
 @Component({
   templateUrl: 'app.html'
@@ -23,21 +24,22 @@ export class MyApp {
     private splashScreen: SplashScreen, 
     private persistence: Persistence,
     private extra: Extra,
-    private login: Login
+    private login: Login,
+    private appCommunication: AppCommunication
   ) {
     platform.ready().then(() => {
       this.statusBar.backgroundColorByHexString('#00B1F0');
       this.splashScreen.hide();
     });
 
-    if (!this.login.isLoged()) {
+    if (this.login.isLoged()) {
       this.rootPage = HomePage;
     } else {
       this.rootPage = LoginPage;
     }
 
-    let communication = new PPUCommunication();
-    communication.registerCommunication();
+    let ppucommunication = new PPUCommunication();
+    this.appCommunication.registerCommunication();
   }
 }
 

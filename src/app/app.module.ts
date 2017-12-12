@@ -28,6 +28,7 @@ import { Transfer } from '../classes/transfer/transfer';
 import { Extra } from '../classes/extra/extra';
 import { Login } from '../classes/login/login';
 import { MServer } from '../classes/mserver/mserver';
+import { AppCommunication } from '../classes/appCommunication/appCommunication'
   
 @NgModule({
   declarations: [
@@ -70,6 +71,7 @@ import { MServer } from '../classes/mserver/mserver';
     Zip,
     Httpd,
     Media,
+    AppCommunication,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })

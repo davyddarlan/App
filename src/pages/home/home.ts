@@ -7,6 +7,7 @@ import { Itens } from '../../classes/itens/itens';
 import { RessourcePage } from '../ressource/ressource';
 import { Item } from '../../classes/item/item';
 import { Transfer } from '../../classes/transfer/transfer';
+import { MServer, URLS } from '../../classes/mserver/mserver';
 import { MenuPage } from '../menu/menu';
 
 @Component({
@@ -25,7 +26,8 @@ export class HomePage {
     private alert: AlertController,
     private popoverCtrl: PopoverController,
     private toastCtrl: ToastController,
-    private network: Network
+    private network: Network,
+    private mserver: MServer
   ) {}
 
   ngOnInit() {
@@ -52,6 +54,9 @@ export class HomePage {
   }
 
   public download(item: Item): void {
+    //test
+    this.mserver.setActionAPI(URLS.PROFILE_USER);
+
     if (!Item.getRefresh()) {
       this.transfer.download(item);
       HomePage.countDonwload++;
