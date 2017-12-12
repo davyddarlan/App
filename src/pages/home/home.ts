@@ -2,12 +2,13 @@ import { Component, ViewChild } from '@angular/core';
 import { NavController, NavParams , AlertController, Content } from 'ionic-angular';
 import { PopoverController, ToastController } from 'ionic-angular';
 import { Network } from '@ionic-native/network';
+import { AppCommunication } from '../../classes/appCommunication/appCommunication';
+import { MServer } from '../../classes/mserver/mserver';
 
 import { Itens } from '../../classes/itens/itens';
 import { RessourcePage } from '../ressource/ressource';
 import { Item } from '../../classes/item/item';
 import { Transfer } from '../../classes/transfer/transfer';
-import { MServer, URLS } from '../../classes/mserver/mserver';
 import { MenuPage } from '../menu/menu';
 
 @Component({
@@ -27,6 +28,7 @@ export class HomePage {
     private popoverCtrl: PopoverController,
     private toastCtrl: ToastController,
     private network: Network,
+    private appCommunication: AppCommunication,
     private mserver: MServer
   ) {}
 
@@ -54,8 +56,18 @@ export class HomePage {
   }
 
   public download(item: Item): void {
-    //test
-    this.mserver.setActionAPI(URLS.PROFILE_USER);
+    //modelo de teste
+    /*this.mserver.on().subscribe((data) => {
+      alert(JSON.stringify(data));
+    });
+
+    this.appCommunication.setState([{
+      log: "ITEM",
+      Datetime: "2015-08-04 22:23:54.586-0300",
+      item: 1,
+      acao: "BAIXAR",
+      complemento: 1546
+    }]);*/
 
     if (!Item.getRefresh()) {
       this.transfer.download(item);

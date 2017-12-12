@@ -37,9 +37,6 @@ export class MyApp {
     } else {
       this.rootPage = LoginPage;
     }
-
-    let ppucommunication = new PPUCommunication();
-    this.appCommunication.registerCommunication();
   }
 }
 
