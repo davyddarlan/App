@@ -57,7 +57,7 @@ export class HomePage {
 
   public download(item: Item): void {
     //modelo de teste
-    /*this.mserver.on().subscribe((data) => {
+    this.mserver.on().subscribe((data) => {
       alert(JSON.stringify(data));
     });
 
@@ -67,7 +67,7 @@ export class HomePage {
       item: 1,
       acao: "BAIXAR",
       complemento: 1546
-    }]);*/
+    }]);
 
     if (!Item.getRefresh()) {
       this.transfer.download(item);

@@ -34,8 +34,7 @@
     "@ionic-native/zip": "^4.3.3",
     "@ionic/storage": "2.0.1",
     "asmcrypto.js": "0.0.11",
-    "cordova-android": "^6.4.0",
-    "cordova-plugin-android-window-background": "^1.0.1",
+    "cordova-plugin-colorbar": "^5.5.0",
     "cordova-plugin-compat": "^1.2.0",
     "cordova-plugin-device": "^1.1.7",
     "cordova-plugin-file": "^5.0.0",
@@ -57,13 +56,14 @@
     "rxjs": "5.4.3",
     "sha512": "0.0.1",
     "sw-toolbox": "3.6.0",
-    "zone.js": "0.8.18"
+    "zone.js": "0.8.18",
+    "cordova-android": "~6.3.0"
   },
   "devDependencies": {
     "@ionic/app-scripts": "3.0.1",
     "@ionic/cli-plugin-cordova": "1.6.2",
     "@ionic/cli-plugin-ionic-angular": "1.4.1",
-    "ionic": "3.14.0",
+    "ionic": "3.19.0",
     "typescript": "2.3.4"
   },
   "description": "An Ionic project",
@@ -82,9 +82,7 @@
       "cordova-plugin-httpd": {},
       "cordova-plugin-inappbrowser": {},
       "cordova-plugin-headercolor": {},
-      "cordova-plugin-android-window-background": {
-        "WINDOW_BACKGROUND_COLOR": "#125dab"
-      }
+      "cordova-plugin-colorbar": {}
     },
     "platforms": [
       "android"

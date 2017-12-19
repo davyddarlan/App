@@ -38,7 +38,7 @@ export class MServer {
         var bytes = crypto.asmcrypto.AES_CBC.decrypt(atob(enc_string), this.key, 0, atob(iv));
         var string = crypto.asmcrypto.bytes_to_string(bytes);
         var obj = JSON.parse(string.replace(/\}[^\w\d]+$/g, '}'));
-        var signature = crypto.asmcrypto.HMAC_SHA256.hex(obj['UNASUS_DEVICE_ID'] + 
+        var signature = crypto.asmcrypto.HMAC_SHA256.hex(obj['UNASUS_ACESSO_UID'] + 
         this.key, obj['UNASUS_SESSION']);
         var returnData = {
             UNASUS_USER_ID: obj['UNASUS_USER_ID'],
@@ -46,6 +46,7 @@ export class MServer {
             UNASUS_SIGNATURE: signature,
             UNASUS_ACESSO_NOME: obj['UNASUS_ACESSO_NOME']
         };
+        alert(JSON.stringify(returnData));
         this.persistence.setPersistence('session', JSON.stringify(returnData));
     }
 
